@@ -9,10 +9,21 @@ public class Player : MonoBehaviour
     public bool UseSmoothMovement = false;
     public float InputMultiplicator = 0.4f;
     public Gun Gun;
-
+    public Door CheckPoint;
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        if (CheckPoint != null)
+        {
+            transform.position = CheckPoint.transform.position +
+                (Vector3)CheckPoint.GetComponent<Collider2D>().offset;
+            Gun.GetScrap(null);
+            Gun.GetScrap(null);
+        }
     }
 
     void Update()
@@ -41,6 +52,6 @@ public class Player : MonoBehaviour
         if (movement.magnitude > InputMultiplicator)
             movement = movement.normalized * InputMultiplicator;
             
-        transform.position += movement;
+        transform.position += movement*Time.deltaTime;
     }
 }

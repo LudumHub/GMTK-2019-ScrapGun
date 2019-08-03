@@ -1,21 +1,39 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     private Transform player;
     private bool isHorisontalMove = true;
-    public float maxSpeed = 0.001f;
-
+    private Vector3 TargetPosition;
+    public float maxSpeed = 7f;
+    public float Speed = 3f;
+    public bool isSleep = false;
+    public float movingForwardAt = 1f;
     private void Start()
     {
         player = Player.instance.transform;
+        transform.parent.GetComponent<Room>().RegisterEnemy(this);
     }
 
-    void Update()
+    private void OnDestroy()
     {
+        Room.UnregisterEnemy(this);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        isHorisontalMove = !isHorisontalMove;
+    }
+
+    void FixedUpdate()
+    {
+        if (isSleep)
+            return;
+        
         var targetDelta = isHorisontalMove
             ? player.position.x - transform.position.x
             : player.position.y - transform.position.y;
@@ -27,9 +45,21 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        targetDelta *= Time.deltaTime * Speed; 
         if (Mathf.Abs(targetDelta) > maxSpeed)
             targetDelta = maxSpeed * Mathf.Sign(targetDelta);
 
-        transform.position += (isHorisontalMove ? Vector3.right : Vector3.up) * targetDelta;
+        transform.position += targetDelta * 
+                              (isHorisontalMove ? Vector3.right : Vector3.up);
+    }
+
+    public void Sleep()
+    {
+        isSleep = true;
+    }
+    
+    public void WakeUp()
+    {
+        isSleep = false;
     }
 }

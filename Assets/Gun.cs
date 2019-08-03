@@ -67,6 +67,8 @@ public class Gun : MonoBehaviour
     List<Sprite> CollectedScrap = new List<Sprite>();
     public void GetScrap(Sprite sprite)
     {
+        if (sprite == null)
+            sprite = BulletPrefab.sprite;
         CollectedScrap.Add(sprite);
         UpdateAmmo(++Ammo);
     }

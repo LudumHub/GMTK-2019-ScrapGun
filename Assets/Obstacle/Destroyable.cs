@@ -22,15 +22,23 @@ public class Destroyable : MonoBehaviour
             return;
         
         if (--hp > 0) return;
-        
-        for (var i = 0; i < MaxHp * 2; i++)
+
+        if (MaxHp > 1)
+            for (var i = 0; i < MaxHp / 2; i++)
+                SpawnScrap();
+        else
+            SpawnScrap();
+
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+
+        void SpawnScrap()
+        {
             Instantiate<Scrap>(
                 ScrapPrefab,
                 transform.position +
                 new Vector3(Random.Range(-1, 1) * lootSpread, Random.Range(-1, 1) * lootSpread),
                 Quaternion.identity);
-        
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        }
     }
 }

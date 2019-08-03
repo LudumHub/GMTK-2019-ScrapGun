@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Wall
   - Bullet
+  - Door
+  - Spawner
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -19,9 +22,9 @@ TagManager:
   - 
   - Bullet
   - Player
-  - 
-  - 
-  - 
+  - Collectables
+  - Enemy
+  - Wall
   - 
   - 
   - 
@@ -44,4 +47,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 1259969203
+    locked: 0
+  - name: Items
+    uniqueID: 2728469111
+    locked: 0
+  - name: Walls
+    uniqueID: 334562767
+    locked: 0
+  - name: markers
+    uniqueID: 4033889141
     locked: 0

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbe363ee59030a4284db973a277c946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  MaxHp: 1
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
   lootSpread: 0.5
@@ -64,6 +64,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,8 +86,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1566498185
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.8584906, g: 0.59104395, b: 0.4008989, a: 1}
