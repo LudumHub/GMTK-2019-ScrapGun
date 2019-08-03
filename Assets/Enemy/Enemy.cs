@@ -11,22 +11,29 @@ public class Enemy : MonoBehaviour
     private Vector3 TargetPosition;
     public float maxSpeed = 7f;
     public float Speed = 3f;
-    public bool isSleep = false;
-    public float movingForwardAt = 1f;
+    bool isSleep = true;
     private void Start()
     {
         player = Player.instance.transform;
-        transform.parent.GetComponent<Room>().RegisterEnemy(this);
     }
 
     private void OnDestroy()
     {
-        Room.UnregisterEnemy(this);
+        Game.UnregisterEnemy(this);
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
+        StartCoroutine(OppositeMovement());
+    }
+
+    private int directionMult = 1;
+    private IEnumerator OppositeMovement()
+    {
+        directionMult = -1;
+        yield return new WaitForSeconds(0.2f);
         isHorisontalMove = !isHorisontalMove;
+        directionMult = 1;
     }
 
     void FixedUpdate()
@@ -45,7 +52,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        targetDelta *= Time.deltaTime * Speed; 
+        targetDelta *= Time.deltaTime * Speed * directionMult; 
         if (Mathf.Abs(targetDelta) > maxSpeed)
             targetDelta = maxSpeed * Mathf.Sign(targetDelta);
 
@@ -53,11 +60,6 @@ public class Enemy : MonoBehaviour
                               (isHorisontalMove ? Vector3.right : Vector3.up);
     }
 
-    public void Sleep()
-    {
-        isSleep = true;
-    }
-    
     public void WakeUp()
     {
         isSleep = false;

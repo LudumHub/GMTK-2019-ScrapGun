@@ -11,6 +11,7 @@ TagManager:
   - Door
   - Spawner
   - Room
+  - Box
   layers:
   - Default
   - TransparentFX

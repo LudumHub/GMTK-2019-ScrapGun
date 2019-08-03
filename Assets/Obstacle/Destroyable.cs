@@ -21,6 +21,12 @@ public class Destroyable : MonoBehaviour
         if (!other.gameObject.CompareTag("Bullet"))
             return;
         
+        GetHit();
+        Destroy(other.gameObject);
+    }
+
+    public void GetHit()
+    {
         if (--hp > 0) return;
 
         if (MaxHp > 1)
@@ -30,7 +36,6 @@ public class Destroyable : MonoBehaviour
             SpawnScrap();
 
         Destroy(gameObject);
-        Destroy(other.gameObject);
 
         void SpawnScrap()
         {

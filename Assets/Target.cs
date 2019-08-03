@@ -7,6 +7,12 @@ public class Target : MonoBehaviour
 {
     public float maxDistanceFromPlayer = 2f;
     public Player Player;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
     void Update()
     {
         var newCoords = Camera.main.ScreenToWorldPoint(Input.mousePosition);

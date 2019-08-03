@@ -13,12 +13,31 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         UpdateAmmo(0);
+        collider = GetComponent<Collider2D>();
     }
 
+    Collider2D collider;
+    public float degMovementIsAttack = 2f;
+    private float prevAngle = 0;
     private void UpdateAmmo(int ammo)
     {
         Ammo = ammo;
         AmmoText.text = Ammo.ToString();
+    }
+
+    public float meleePushPower = 100;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            var vector = other.transform.position - transform.position;
+            other.GetComponent<Rigidbody2D>().AddForce(vector * meleePushPower, ForceMode2D.Impulse);
+        }
+        else if (other.CompareTag("Box"))
+        {
+            other.GetComponent<Destroyable>().GetHit();
+        }
     }
 
     void Update()
@@ -39,6 +58,10 @@ public class Gun : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
             StartCoroutine(Shoot());
+
+        collider.enabled =
+            Mathf.Abs(prevAngle - eulerZ) > degMovementIsAttack;
+        prevAngle = eulerZ;
     }
 
     private IEnumerator Shoot()
