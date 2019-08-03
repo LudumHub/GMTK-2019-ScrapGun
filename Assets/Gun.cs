@@ -49,15 +49,19 @@ public class Gun : MonoBehaviour
         var randomShift = 0;
         var shootPosition = TextAncor.position;
         var shootRotation = transform.rotation.eulerAngles;
+        var amount = Ammo;
+        
+        var degPerBulletMult = 20;
+        var degrees = degPerBulletMult * Ammo;
         foreach (var sprite in CollectedScrap)
         {
             var rotation = shootRotation;
-            rotation.z += Random.Range(-randomShift, randomShift)*3;
+            rotation.z += -(degrees/2) + (amount - Ammo) * degPerBulletMult;
             
             var b = Instantiate(BulletPrefab, shootPosition, Quaternion.Euler(rotation));
             b.sprite = sprite;
+            b.GetComponent<Bullet>().Amount = amount;
             UpdateAmmo(--Ammo);
-            yield return new WaitForFixedUpdate();
             randomShift++;
         }
         

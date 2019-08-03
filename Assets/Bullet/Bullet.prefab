@@ -47,10 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c5711809c860b48bcf8d80a87e46f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Force: {x: 0, y: 30}
-  MaxReflects: 2
+  Force: {x: 0, y: 10}
+  MaxReflects: 10
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
+  Amount: 1
+  maxLife: 2
+  minLife: 0.2
+  maxBullets: 5
 --- !u!212 &2191518772365370453
 SpriteRenderer:
   m_ObjectHideFlags: 0
