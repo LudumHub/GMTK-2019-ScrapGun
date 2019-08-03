@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\MyIndieWorld\GMTK Scrapgun" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Bullet" t="Include">
+          <e p="Bullet.cs" t="Include" />
+        </e>
+        <e p="CamerePosition.cs" t="Include" />
+        <e p="Enemy" t="Include">
+          <e p="Enemy.cs" t="Include" />
+        </e>
+        <e p="Gun.cs" t="Include" />
+        <e p="Obstacle" t="Include">
+          <e p="Destroyable.cs" t="Include" />
+        </e>
+        <e p="Player.cs" t="Include" />
+        <e p="Scrap" t="Include">
+          <e p="Scrap.cs" t="Include" />
+        </e>
+        <e p="Target.cs" t="Include" />
+      </e>
+      <e p="GMTK Scrapgun.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\Linver\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Linver\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_GMTK Scrapgun.-2117351832.00" t="ExcludeRecursive" />
+  </component>
+</project>
