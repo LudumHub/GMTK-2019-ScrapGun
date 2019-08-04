@@ -37,6 +37,9 @@
         <e p="Scrap" t="Include">
           <e p="Scrap.cs" t="Include" />
         </e>
+        <e p="Sounds" t="Include">
+          <e p="MusicBox.cs" t="Include" />
+        </e>
         <e p="Target.cs" t="Include" />
       </e>
       <e p="GMTKScrapGun.sln" t="IncludeFlat" />

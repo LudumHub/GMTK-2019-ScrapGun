@@ -33,8 +33,13 @@ public class CamerePosition : MonoBehaviour
     public float smoothTime = 1;
     private Vector3 velocity = Vector3.zero;
     private Vector3 lastTarget;
+    public bool isShaking = false;
+
     void LateUpdate()
     {
+        if (isShaking)
+            return;
+        
         var target = new Vector3(
             (Player.position.x + Target.position.x)/2,
             (Player.position.y + Target.position.y)/2, 

@@ -12,7 +12,7 @@ public class Shaker : MonoBehaviour {
     float timer = 0;
     public float deviationChangeTimer = 4f;
     public float deviationSize = 2f;
-    public Vector3 StartPosition;
+    Vector3 StartPosition;
     float ShakeTimer = 0f;
     private bool preserveTimer;
 
@@ -20,37 +20,43 @@ public class Shaker : MonoBehaviour {
 
     public void Shake(float seconds)
     {
+        camPos.isShaking = true;
+        StartPosition = transform.position;
         if (!preserveTimer)
             ShakeTimer = seconds;
     }
 
-    public void ShakeContinuously(float seconds)
+    public void ShakeContinuously(float power = 1, float seconds = .3f)
     {
+        deviationSize = power;
         Shake(seconds);
         preserveTimer = true;
     }
 
+    private CamerePosition camPos;
     private void Awake()
     {
-        StartPosition = transform.position;
+        camPos = GetComponent<CamerePosition>();
         instance = this;
     }
 
     private void Update()
     {
+        if (!camPos.isShaking)
+            return;
+        
         if (ShakeTimer < 0f)
         {
             preserveTimer = false;
-            destination = StartPosition;
+            camPos.isShaking = false;
         }
-        else
+        else 
         {
             ShakeTimer -= Time.deltaTime;
-            destination = StartPosition +
-                deviation;
-
+            destination = StartPosition + deviation;
             GenerateDeviation();
         }
+        
     }
 
     private void GenerateDeviation()
@@ -64,6 +70,9 @@ public class Shaker : MonoBehaviour {
 
     void LateUpdate()
     {
+        if (!camPos.isShaking)
+            return;
+        
         transform.position =
             Vector3.SmoothDamp(transform.position, destination, ref smoothDampVelocity, smoothDampTime);
     }

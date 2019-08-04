@@ -17,6 +17,8 @@ public class Effects : MonoBehaviour
     {
         Instantiate(instance.Explosion, coords, Quaternion.identity)
             .transform.localScale*=scale;
+        
+        Shaker.instance.ShakeContinuously(2);
     }
 
     public static void Smoke(Vector3 coords, float scale = 1)
@@ -24,5 +26,14 @@ public class Effects : MonoBehaviour
         var d = Instantiate(instance.Dust, coords, Quaternion.identity);
         d.transform.localScale *= scale;
         d.Play();
+    }
+    
+    public static void Shoot(Vector3 coords, float scale = 3)
+    {
+        var d = Instantiate(instance.Dust, coords, Quaternion.identity);
+        d.transform.localScale *= scale;
+        d.Play();
+        
+        Shaker.instance.ShakeContinuously(.5f);
     }
 }

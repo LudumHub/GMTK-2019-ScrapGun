@@ -14,10 +14,8 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         UpdateAmmo(0);
-        collider = GetComponent<Collider2D>(); 
     }
-
-    Collider2D collider;
+    
     public Transform ShootingPoint;
 
     public float degMovementIsAttack = 2f;
@@ -162,6 +160,9 @@ public class Gun : MonoBehaviour
         var shootPosition = ShootingPoint.position;
         var amount = Ammo;
         var gun_rotation = transform.rotation.eulerAngles.z;
+        
+        Effects.Shoot(shootPosition);
+        
         foreach (var sprite in CollectedScrap)
         {
              var rotation_z = gun_rotation +
