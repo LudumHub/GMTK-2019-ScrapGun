@@ -30,13 +30,13 @@ public class Game : MonoBehaviour
         new Dictionary<string, int>(),
         new Dictionary<string, int>(){{"Pusher", 1}},
         new Dictionary<string, int>(){{"Pusher", 5}},
-        new Dictionary<string, int>(){{"Catapult", 1}},
-        new Dictionary<string, int>(){{"Catapult", 3}, {"Pusher", 1}},
+        new Dictionary<string, int>(){{"Catapult", 3}},
+        new Dictionary<string, int>(){{"Catapult", 1}, {"Pusher", 5}},
         new Dictionary<string, int>(){{"Swarmling", 4}},
-        new Dictionary<string, int>(){{"Swarmling", 2},{"Catapult", 1}},
-        new Dictionary<string, int>(){{"Pusher", 3},{"Catapult", 3}},
+        new Dictionary<string, int>(){{"Swarmling", 2},{"PusherBig",1},{"Catapult", 1}},
+        new Dictionary<string, int>(){{"PusherBig",5},{"Catapult", 4}},
         new Dictionary<string, int>(){{"Swarmling", 9}},
-        new Dictionary<string, int>(){{"Pusher", 3},{"Catapult", 3},{"Swarmling", 5}}
+        new Dictionary<string, int>(){{"Pusher", 3},{"Catapult", 3},{"Swarmling", 5},{"PusherBig",2}}
     };
 
     public void Damage()
