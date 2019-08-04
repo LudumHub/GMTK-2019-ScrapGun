@@ -139,10 +139,10 @@ public class Gun : MonoBehaviour
         var eulerZ = rot_z - 90;
 
         var newRotation = Quaternion.Euler(0f, 0f, eulerZ);
-        //if (Quaternion.Angle(prevAngle, newRotation) > MaxEulerPerFrame)
-        //newRotation = 
-            
-            transform.rotation = newRotation;
+        transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                newRotation, 
+                MaxEulerPerFrame * Time.deltaTime);
 
         if (Input.GetMouseButtonDown(0))
             StartCoroutine(Shoot());

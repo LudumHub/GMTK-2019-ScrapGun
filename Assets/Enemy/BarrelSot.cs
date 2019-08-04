@@ -19,7 +19,7 @@ public class BarrelSot : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(LandedVersion, target, Quaternion.identity)
-                .ExtraDrop = -1;
+                .ExtraDrop = 0;
         }
         
         transform.Rotate(0,0,Time.deltaTime * rotationSpeed

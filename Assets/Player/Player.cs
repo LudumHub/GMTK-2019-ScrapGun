@@ -47,9 +47,13 @@ public class Player : MonoBehaviour
         transform.position += movement*Time.deltaTime;
     }
 
+    public float MaxEulerPerFrame = 130;
     private void FixedUpdate()
     {
-        Visual.transform.rotation = Gun.transform.rotation;
+        Visual.transform.rotation = Quaternion.RotateTowards(
+            Visual.transform.rotation, 
+            Gun.transform.rotation, 
+            MaxEulerPerFrame * Time.deltaTime); 
     }
     
     public void GetHit(Vector3 direction)

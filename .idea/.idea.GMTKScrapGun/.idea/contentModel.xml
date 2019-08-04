@@ -19,6 +19,11 @@
           <e p="BarrelSot.cs" t="Include" />
           <e p="Enemy.cs" t="Include" />
         </e>
+        <e p="Font" t="Include">
+          <e p="impact" t="Include">
+            <e p="sharefonts.net.txt" t="Include" />
+          </e>
+        </e>
         <e p="Game.cs" t="Include" />
         <e p="Obstacle" t="Include">
           <e p="Destroyable.cs" t="Include" />

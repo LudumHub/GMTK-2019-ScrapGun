@@ -965,6 +965,7 @@ MonoBehaviour:
   InputMultiplicator: 3
   Gun: {fileID: 6071108084112642557}
   Visual: {fileID: 6071108082423821229}
+  MaxEulerPerFrame: 340
   isStunned: 0
 --- !u!50 &6071108082689583433
 Rigidbody2D:
@@ -1302,6 +1303,7 @@ MonoBehaviour:
   - {fileID: 735410159107507531}
   - {fileID: 8636617271793121131}
   meleePushPower: 1
+  MaxEulerPerFrame: 450
 --- !u!61 &6071108084112642556
 BoxCollider2D:
   m_ObjectHideFlags: 0
