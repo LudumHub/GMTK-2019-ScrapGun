@@ -58,6 +58,7 @@ public class Game : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    Animator announcerAnimator;
     private void Awake()
     {
         Beasteary = new Dictionary<string, Enemy>()
@@ -71,6 +72,8 @@ public class Game : MonoBehaviour
         instance = this;
         Wave = Save;
         GenerateWave();
+
+        announcerAnimator = WaveAnnouncer.GetComponent<Animator>();
     }
 
     public Transform MainMenu;
@@ -85,21 +88,28 @@ public class Game : MonoBehaviour
     {
         MainMenu.gameObject.SetActive(true);
         camScript.camShift = new Vector3(0,2,0);
-        Player.instance.Gun.GetScrap();
-        
+          
         yield return new WaitForSeconds(.5f);
-        
+        Player.instance.Gun.GetScrap();
+
         while (!Input.GetMouseButtonDown(0))
             yield return null;
-        
+
         MainMenu.gameObject.SetActive(false);
         camScript.camShift = Vector3.zero;
+
+        yield return new WaitForSeconds(1f);
+
+        yield return StartCoroutine(AnnounceText("Collect scrap"));
+
+        Wave = 1;
+        Save = Wave;
+        GenerateWave();
     }
 
     List<Enemy> units = new List<Enemy>(); 
     IEnumerator WaveAction()
     {
-        var animator = WaveAnnouncer.GetComponent<Animator>();
         yield return StartCoroutine(AnnounceText("Prepare"));
         yield return  StartCoroutine(AnnounceText("Wave " + Wave));
         
@@ -132,13 +142,13 @@ public class Game : MonoBehaviour
         Wave++;
         Save = Wave;
         GenerateWave();
+    }
 
-        IEnumerator AnnounceText(string text)
-        {
-            WaveAnnouncer.text = text;
-            animator.SetTrigger("Show");
-            yield return new WaitForSeconds(5);
-        }
+    IEnumerator AnnounceText(string text)
+    {
+        WaveAnnouncer.text = text;
+        announcerAnimator.SetTrigger("Show");
+        yield return new WaitForSeconds(5);
     }
 
     private float timer;
