@@ -30,11 +30,11 @@ public class Game : MonoBehaviour
         new Dictionary<string, int>(),
         new Dictionary<string, int>(){{"Pusher", 1}},
         new Dictionary<string, int>(){{"Pusher", 5}},
-        new Dictionary<string, int>(){{"Catapult", 3}},
-        new Dictionary<string, int>(){{"Catapult", 1}, {"Pusher", 5}},
+        new Dictionary<string, int>(){{"Catapult", 1}},
+        new Dictionary<string, int>(){{"Catapult", 3}, {"Pusher", 3}},
         new Dictionary<string, int>(){{"Swarmling", 4}},
-        new Dictionary<string, int>(){{"Swarmling", 2},{"PusherBig",1},{"Catapult", 1}},
-        new Dictionary<string, int>(){{"PusherBig",5},{"Catapult", 4}},
+        new Dictionary<string, int>(){{"PusherBig",1},{"Swarmling", 2}},
+        new Dictionary<string, int>(){{"PusherBig",2},{"Catapult", 4}},
         new Dictionary<string, int>(){{"Swarmling", 9}},
         new Dictionary<string, int>(){{"Pusher", 3},{"Catapult", 3},{"Swarmling", 5},{"PusherBig",2}}
     };
@@ -125,13 +125,19 @@ public class Game : MonoBehaviour
 
         foreach (var UnitAndAmount in Waves.ElementAt(Wave))
         {
+            var prev = Vector3.zero;
             for (var i = 0; i < UnitAndAmount.Value; i++)
             {
-                var position = (Beasteary[UnitAndAmount.Key] == Catapult
-                                   ? RangeSpawns[Random.Range(0, RangeSpawns.Count)]
-                                   : MeleeSpawns[Random.Range(0, MeleeSpawns.Count)]
-                               ).position
-                               + Vector3.left * Random.Range(-.3f, .3f);
+                Vector3 position;
+                do
+                    position = (Beasteary[UnitAndAmount.Key] == Catapult
+                            ? RangeSpawns[Random.Range(0, RangeSpawns.Count)]
+                            : MeleeSpawns[Random.Range(0, MeleeSpawns.Count)]
+                        ).position;
+                while (position == prev);
+                prev = position;
+                
+                position += Vector3.left * Random.Range(-.3f, .3f);
 
                 var unit = Instantiate(
                     Beasteary[UnitAndAmount.Key],

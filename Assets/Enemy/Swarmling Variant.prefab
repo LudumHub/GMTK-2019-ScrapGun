@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 7603118670948426284, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
       propertyPath: m_Name
-      value: Swarmling
+      value: Swarmling Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426286, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
@@ -75,17 +75,17 @@ PrefabInstance:
     - target: {fileID: 7603118670948426286, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49595
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426286, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.49595
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426286, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.49595
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426287, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}

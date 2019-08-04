@@ -16,8 +16,10 @@ public class Enemy : MonoBehaviour
     public float waitingTime = 1f;
 
     public bool isHoldDistance = false;
+    private float scale;
     private void Start()
     {
+        scale =  Mathf.Abs(transform.localScale.x);
         player = Player.instance.transform;
         if (isHoldDistance)
             targetDistance = 12f;
@@ -54,7 +56,6 @@ public class Enemy : MonoBehaviour
         if (bulletPrefab != null)
             yield break;
         
-        MusicBox.Play("Robot");
         Dust.Play();
         
         directionMult = -1;
@@ -92,6 +93,7 @@ public class Enemy : MonoBehaviour
             currentPause = waitingTime;
             isHorisontalMove = !isHorisontalMove;
             Dust.Play();
+            MusicBox.Play("Robot");
             return;
         }
 
@@ -115,8 +117,9 @@ public class Enemy : MonoBehaviour
                          (isHorisontalMove ? Vector3.right : Vector3.up);
         transform.position += lastVector;
         
-        transform.localScale = targetDelta > 0 ? 
-            Vector3.one : new Vector3(-1,1,1);
+        transform.localScale = (targetDelta > 0 ? 
+            Vector3.one  
+            : new Vector3(-1,1,1)) * scale;
     }
 
     public BarrelSot bulletPrefab;

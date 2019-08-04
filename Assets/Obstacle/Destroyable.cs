@@ -26,6 +26,12 @@ public class Destroyable : MonoBehaviour
                 .GetHit(transform.position - other.transform.position);
             MusicBox.Play("Push");
         }
+        
+        if (other.gameObject.CompareTag("Box") && isDangerous)
+        {
+            other.gameObject.GetComponent<Destroyable>()
+                .GetHit(transform.position - other.transform.position);
+        }
 
         if (!other.gameObject.CompareTag("Bullet"))
             return;

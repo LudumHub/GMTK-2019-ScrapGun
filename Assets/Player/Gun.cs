@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
 
     static List<float> DistancesPerBulletsAmount = new List<float>()
     {
-        99, 35, 12, 7, 5.8f, 5.5f, 5, 4.5f, 4, 3.5f, 3, 2.5f, 2.2f, 2f, 1.9f, 1.8f, 1.7f, 1.6f, 1.5f, 1.4f
+        99, 35, 12, 6f, 5.7f, 5.5f, 5, 4.5f, 4, 3.5f, 3, 2.5f, 2.2f, 2f, 1.9f, 1.8f, 1.7f, 1.6f, 1.5f, 1.4f
     };
 
     public static float GetBulletDistance(int bulletsAmount)
@@ -43,9 +43,10 @@ public class Gun : MonoBehaviour
 
     public static float GetDegreeSpread(int bulletsAmount)
     {
-        return DegreeSpreadPerBulletsAmount[
-            Mathf.Min(DegreeSpreadPerBulletsAmount.Count - 1, bulletsAmount)
-        ];
+        if (bulletsAmount < DegreeSpreadPerBulletsAmount.Count)
+            return DegreeSpreadPerBulletsAmount[bulletsAmount];
+        else
+            return 360 / bulletsAmount;
     }
     
     static List<float> BulletSizePerBulletsAmount = new List<float>()

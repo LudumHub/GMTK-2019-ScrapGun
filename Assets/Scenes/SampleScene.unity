@@ -2150,6 +2150,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 2001601429}
+    - target: {fileID: 697971396, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.54
+      objectReference: {fileID: 0}
     - target: {fileID: 1295760304, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2, type: 3}
       propertyPath: m_LocalPosition.y
       value: -5.38
@@ -2590,6 +2594,41 @@ PrefabInstance:
         type: 3}
       propertyPath: isPreseted
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474996449297918479, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 474996449297918479, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627565694322371555, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627565694322371555, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071859468014898221, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537464907868101747, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537464907868101747, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7256beb4d95631b40b24ecf0d68262c9, type: 3}
