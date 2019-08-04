@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.collider.CompareTag("Player"))
+            other.gameObject.GetComponent<Player>()
+                .GetHit(lastVector);
+        
         StartCoroutine(OppositeMovement());
     }
 
@@ -36,6 +40,7 @@ public class Enemy : MonoBehaviour
         directionMult = 1;
     }
 
+    private Vector3 lastVector;
     void FixedUpdate()
     {
         if (isSleep)
@@ -56,8 +61,9 @@ public class Enemy : MonoBehaviour
         if (Mathf.Abs(targetDelta) > maxSpeed)
             targetDelta = maxSpeed * Mathf.Sign(targetDelta);
 
-        transform.position += targetDelta * 
-                              (isHorisontalMove ? Vector3.right : Vector3.up);
+        lastVector = targetDelta *
+                         (isHorisontalMove ? Vector3.right : Vector3.up);
+        transform.position += lastVector;
     }
 
     public void WakeUp()

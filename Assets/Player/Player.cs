@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(isStunned)
+            return;
+        
         var movement = Vector3.zero;
 
         if (UseSmoothMovement)
@@ -46,5 +49,30 @@ public class Player : MonoBehaviour
             movement = movement.normalized * InputMultiplicator;
             
         transform.position += movement*Time.deltaTime;
+    }
+
+    public void GetHit(Vector3 direction)
+    {
+        StartCoroutine(HitState(direction));
+    }
+
+    public bool isStunned = false;
+    private IEnumerator HitState(Vector3 direction)
+    {
+        if(isStunned)
+            yield break;
+        
+        isStunned = true;
+        foreach (var line in Gun.activeHelpers)
+            line.gameObject.SetActive(false);
+
+        var rBody = GetComponent<Rigidbody2D>();
+        rBody.AddForce(direction.normalized * 5, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        rBody.velocity = Vector2.zero;
+        
+        isStunned = false;
+        foreach (var line in Gun.activeHelpers)
+            line.gameObject.SetActive(true);
     }
 }

@@ -22,12 +22,12 @@ public class Gun : MonoBehaviour
     Collider2D collider;
     public float degMovementIsAttack = 2f;
     private float prevAngle = 0;
-    private List<LineRenderer> activeHelpers = new List<LineRenderer>();
+    public List<LineRenderer> activeHelpers = new List<LineRenderer>();
     private List<float> eulerHelpers = new List<float>();
     
     static List<float> DistancesPerBulletsAmount = new List<float>()
     {
-        25, 19, 15, 12, 10, 8, 7, 6, 5, 4
+        99, 35, 25, 19, 10, 7, 6, 5, 4.5f, 4, 3.5f, 3
     };
 
     public static float GetBulletDistance(int bulletsAmount)
@@ -51,13 +51,13 @@ public class Gun : MonoBehaviour
     
     static List<float> BulletSizePerBulletsAmount = new List<float>()
     {
-        1, 1.1f, 1.3f, 1.5f, 1.7f, 2, 2.3f, 2.5f, 3f, 3.5f
+        1, 1, 1.1f, 1.2f, 1.3f, 1.4f, 1.6f, 1.7f, 1.8f, 2f
     };
 
     public static float GetBulletSize(int bulletsAmount)
     {
-        return DegreeSpreadPerBulletsAmount[
-            Mathf.Min(DegreeSpreadPerBulletsAmount.Count - 1, bulletsAmount)
+        return BulletSizePerBulletsAmount[
+            Mathf.Min(BulletSizePerBulletsAmount.Count - 1, bulletsAmount)
         ];
     }
     
@@ -117,6 +117,9 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        if (Player.instance.isStunned)
+            return;
+        
         var diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         diff.Normalize();
  
