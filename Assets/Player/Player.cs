@@ -9,9 +9,11 @@ public class Player : MonoBehaviour
     public bool UseSmoothMovement = false;
     public float InputMultiplicator = 0.4f;
     public Gun Gun;
-    public Transform Visual; 
+    public Transform Visual;
+    private Animator myAnimator;
     private void Awake()
     {
+        myAnimator = GetComponent<Animator>();
         instance = this;
     }
 
@@ -41,12 +43,29 @@ public class Player : MonoBehaviour
                        new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         }
 
-        if (movement.magnitude > InputMultiplicator)
+        var magn = movement.magnitude;
+        if (magn >  InputMultiplicator)
             movement = movement.normalized * InputMultiplicator;
+        
+        myAnimator.SetFloat("Movement", magn);
             
         transform.position += movement*Time.deltaTime;
     }
 
+    public ParticleSystem leftLeg;
+    public ParticleSystem rightLeg;
+    public void LeftStepTrigger()
+    {
+        MusicBox.Play("Steps");
+        leftLeg.Play();
+    }
+
+    public void RightStepTrigger()
+    {
+        MusicBox.Play("Steps");
+        rightLeg.Play();
+    }
+    
     public float MaxEulerPerFrame = 130;
     private void FixedUpdate()
     {
@@ -55,7 +74,7 @@ public class Player : MonoBehaviour
             Gun.transform.rotation, 
             MaxEulerPerFrame * Time.deltaTime); 
     }
-    
+
     public void GetHit(Vector3 direction)
     {
         Shaker.instance.ShakeContinuously();

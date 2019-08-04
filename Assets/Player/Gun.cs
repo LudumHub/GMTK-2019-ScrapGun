@@ -156,6 +156,8 @@ public class Gun : MonoBehaviour
         if (Ammo == 0)
             yield break;
 
+        MusicBox.Play("Shotgun");
+        
         var randomShift = 0;
         var shootPosition = ShootingPoint.position;
         var amount = Ammo;
@@ -186,6 +188,7 @@ public class Gun : MonoBehaviour
     List<Sprite> CollectedScrap = new List<Sprite>();
     public void GetScrap(Sprite sprite = null)
     {
+        MusicBox.Play("PickScrap");
         if (sprite == null)
             sprite = BulletPrefab.sprite;
         CollectedScrap.Add(sprite);

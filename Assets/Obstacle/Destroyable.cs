@@ -20,10 +20,13 @@ public class Destroyable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Player") && isDangerous)
+        if (other.gameObject.CompareTag("Player") && isDangerous)
+        {
             other.gameObject.GetComponent<Player>()
                 .GetHit(transform.position - other.transform.position);
-        
+            MusicBox.Play("Push");
+        }
+
         if (!other.gameObject.CompareTag("Bullet"))
             return;
 

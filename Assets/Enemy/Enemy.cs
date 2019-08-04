@@ -31,28 +31,38 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("Player"))
+        {
             other.gameObject.GetComponent<Player>()
                 .GetHit(lastVector);
+            MusicBox.Play("Push");
+        }
 
         if (other.collider.CompareTag("Box"))
         {
             other.gameObject.GetComponent<Destroyable>()
                 .GetHit(lastVector);
+            MusicBox.Play("Push");
         }
 
         StartCoroutine(OppositeMovement());
     }
 
+    public ParticleSystem Dust;
     private int directionMult = 1;
     private IEnumerator OppositeMovement()
     {
         if (bulletPrefab != null)
             yield break;
-            
+        
+        MusicBox.Play("Robot");
+        Dust.Play();
+        
         directionMult = -1;
         currentPause = waitingTime/2;
         yield return new WaitForSeconds(waitingTime/2);
         yield return new WaitForSeconds(0.04f);
+        
+        Dust.Play();
         isHorisontalMove = !isHorisontalMove;
         directionMult = 1;
         currentPause = waitingTime;
@@ -82,6 +92,7 @@ public class Enemy : MonoBehaviour
         {
             currentPause = waitingTime;
             isHorisontalMove = !isHorisontalMove;
+            Dust.Play();
             return;
         }
 
