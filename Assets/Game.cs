@@ -84,11 +84,12 @@ public class Game : MonoBehaviour
             WaveAction());
     }
 
+    Vector3 canShift = new Vector3(0, 2, 0);
     private IEnumerator MainMenuAction()
     {
         MainMenu.gameObject.SetActive(true);
-        camScript.camShift = new Vector3(0,2,0);
-          
+        camScript.camShift = canShift;
+
         yield return new WaitForSeconds(.5f);
         Player.instance.Gun.GetScrap();
 
@@ -110,9 +111,18 @@ public class Game : MonoBehaviour
     List<Enemy> units = new List<Enemy>(); 
     IEnumerator WaveAction()
     {
-        yield return StartCoroutine(AnnounceText("Prepare"));
-        yield return  StartCoroutine(AnnounceText("Wave " + Wave));
-        
+        if (Wave < Waves.Count - 1)
+        {
+            yield return StartCoroutine(AnnounceText("Prepare"));
+            yield return StartCoroutine(AnnounceText("Wave " + Wave));
+        }
+        else
+        {
+            yield return StartCoroutine(AnnounceText("Attention"));
+            yield return StartCoroutine(AnnounceText("Final Wave"));
+        }
+
+
         foreach (var UnitAndAmount in Waves.ElementAt(Wave))
         {
             for (var i = 0; i < UnitAndAmount.Value; i++)
@@ -139,9 +149,27 @@ public class Game : MonoBehaviour
         while (units.Count > 0)
             yield return new WaitForFixedUpdate();
 
-        Wave++;
-        Save = Wave;
-        GenerateWave();
+        if (Wave < Waves.Count - 1)
+        {
+            Wave++;
+            Save = Wave;
+            GenerateWave();
+        }
+        else
+            EndGame();
+    }
+
+    public Transform EndPanel;
+    public Text CongratText;
+    private void EndGame()
+    {
+        EndPanel.gameObject.SetActive(true);
+        var min = Math.Floor(MusicBox.Timer / 60);
+        var sec = (int)(MusicBox.Timer % 60);
+        CongratText.text = "You get them all at " + min +":" + sec + "\n" +
+            "It may be the best time at comments below :3";
+
+        camScript.camShift = canShift;
     }
 
     IEnumerator AnnounceText(string text)
