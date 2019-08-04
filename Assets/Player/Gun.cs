@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour
 {
-    public TextMesh AmmoText;
-    public Transform TextAncor;
     public int Ammo = 0;
     public SpriteRenderer BulletPrefab;
 
@@ -16,12 +14,14 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         UpdateAmmo(0);
-        collider = GetComponent<Collider2D>(); ;
+        collider = GetComponent<Collider2D>(); 
     }
 
     Collider2D collider;
+    public Transform ShootingPoint;
+
     public float degMovementIsAttack = 2f;
-    private float prevAngle = 0;
+    private Quaternion prevAngle = Quaternion.identity;
     public List<LineRenderer> activeHelpers = new List<LineRenderer>();
     private List<float> eulerHelpers = new List<float>();
     public List<Transform> HaveScrapVisual;
@@ -75,7 +75,7 @@ public class Gun : MonoBehaviour
         
         for (var i = 0; i < ammo; i++)
         {
-            var line = Instantiate(HelperLine, transform.position, Quaternion.identity, transform);
+            var line = Instantiate(HelperLine, ShootingPoint.position, Quaternion.identity, transform);
             activeHelpers.Add(line);
             
             var rotation = transform.up;
@@ -101,8 +101,7 @@ public class Gun : MonoBehaviour
             HaveScrapVisual[2].gameObject.SetActive(true); 
         
         Ammo = ammo;
-        AmmoText.text = Ammo.ToString();
-        
+
         Vector3 RotateRadians(Vector3 v, float radians)
         {
             var ca = Mathf.Cos(radians);
@@ -125,6 +124,8 @@ public class Gun : MonoBehaviour
             other.GetComponent<Destroyable>().GetHit();
         }
     }
+    
+    public float MaxEulerPerFrame = 0.5f;
 
     void Update()
     {
@@ -136,21 +137,17 @@ public class Gun : MonoBehaviour
  
         var rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         var eulerZ = rot_z - 90;
-        transform.rotation = Quaternion.Euler(0f, 0f, eulerZ); 
-        
-        if (eulerZ < 65 && eulerZ > -65)
-            transform.localPosition = Vector3.forward;
-        else
-            transform.localPosition= Vector3.back;
 
-        AmmoText.transform.position = TextAncor.transform.position;
+        var newRotation = Quaternion.Euler(0f, 0f, eulerZ);
+        //if (Quaternion.Angle(prevAngle, newRotation) > MaxEulerPerFrame)
+        //newRotation = 
+            
+            transform.rotation = newRotation;
 
         if (Input.GetMouseButtonDown(0))
             StartCoroutine(Shoot());
-
-        collider.enabled =
-            Mathf.Abs(prevAngle - eulerZ) > degMovementIsAttack;
-        prevAngle = eulerZ;
+        
+        prevAngle = transform.rotation;
     }
 
     private IEnumerator Shoot()
@@ -159,7 +156,7 @@ public class Gun : MonoBehaviour
             yield break;
 
         var randomShift = 0;
-        var shootPosition = TextAncor.position;
+        var shootPosition = ShootingPoint.position;
         var amount = Ammo;
         var gun_rotation = transform.rotation.eulerAngles.z;
         foreach (var sprite in CollectedScrap)

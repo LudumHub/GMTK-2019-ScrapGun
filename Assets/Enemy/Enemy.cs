@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         player = Player.instance.transform;
         timer = Random.Range(0, shootTimer);
         if (isHoldDistance)
-            targetDistance = 7f;
+            targetDistance = 8f;
     }
 
     private void OnDestroy()
@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
 
         if (other.collider.CompareTag("Box"))
         {
-            return;
+            other.gameObject.GetComponent<Destroyable>()
+                .GetHit(lastVector);
         }
 
         StartCoroutine(OppositeMovement());

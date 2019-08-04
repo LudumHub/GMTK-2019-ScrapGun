@@ -76,17 +76,14 @@ public class Player : MonoBehaviour
         foreach (var line in Gun.activeHelpers)
             line.gameObject.SetActive(true);
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    
+    public void CatchBullet(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            if (other.gameObject.GetComponent<Bullet>().reflects == 0)
-                return;
+        if (other.gameObject.GetComponent<Bullet>().reflects == 0)
+            return;
             
-            Destroy(other.gameObject);
-            Gun.GetScrap(other.gameObject.GetComponent<SpriteRenderer>().sprite);
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
+        Destroy(other.gameObject);
+        Gun.GetScrap(other.gameObject.GetComponent<SpriteRenderer>().sprite);
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

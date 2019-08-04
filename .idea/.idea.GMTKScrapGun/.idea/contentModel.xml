@@ -24,6 +24,7 @@
           <e p="Destroyable.cs" t="Include" />
         </e>
         <e p="Player" t="Include">
+          <e p="BulletsCatcher.cs" t="Include" />
           <e p="Gun.cs" t="Include" />
           <e p="Player.cs" t="Include" />
         </e>
