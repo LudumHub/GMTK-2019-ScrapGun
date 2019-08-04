@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Scrap : MonoBehaviour
 {
+    private void Start()
+    {
+        Effects.Smoke(transform.position, 1f);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))

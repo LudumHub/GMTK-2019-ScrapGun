@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         player = Player.instance.transform;
         timer = Random.Range(0, shootTimer);
         if (isHoldDistance)
-            targetDistance = 8f;
+            targetDistance = 12f;
     }
 
     private void OnDestroy()
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
 
     public BarrelSot bulletPrefab;
     public float shootTimer = 3f;
-    private float spawnTimeout = 1f;
+    private float spawnTimeout = 3f;
     private float timer = 0;
     private void ShootingCheck()
     {

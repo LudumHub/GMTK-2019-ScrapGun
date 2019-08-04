@@ -10,6 +10,7 @@
         </e>
         <e p="CamerePosition.cs" t="Include" />
         <e p="Effects" t="Include">
+          <e p="Effects.cs" t="Include" />
           <e p="Explosion" t="Include">
             <e p="AutoDestroy.cs" t="Include" />
           </e>

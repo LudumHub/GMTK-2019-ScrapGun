@@ -11,30 +11,42 @@ public class Destroyable : MonoBehaviour
     public Scrap ScrapPrefab;
     public float lootSpread = .5f;
     public int ExtraDrop = 0;
-
+    private Rigidbody2D rBody;
     private void Awake()
     {
+        rBody = GetComponent<Rigidbody2D>();
         hp = MaxHp;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if(other.gameObject.CompareTag("Player") && rBody.velocity != Vector2.zero)
+            other.gameObject.GetComponent<Player>()
+                .GetHit(transform.position - other.transform.position);
+        
         if (!other.gameObject.CompareTag("Bullet"))
             return;
 
-        GetHit();
-        Destroy(other.gameObject);
+        GetHit(other);
     }
 
-    public void GetHit()
+    private bool isAlive = true;
+    public void GetHit(Collision2D other = null)
     {
+        if (!isAlive) return;
+        
         if (--hp > 0) return;
-
+        isAlive = false;
+        
         for (var i = 0; i < MaxHp + ExtraDrop; i++)
             SpawnScrap();
 
+        GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject);
-
+        if (other != null)
+            Destroy(other.gameObject);
+        
+        Effects.Explode(transform.position);
         void SpawnScrap()
         {
             Vector3 pos;
@@ -50,7 +62,7 @@ public class Destroyable : MonoBehaviour
                 Quaternion.identity);
         }
     }
-
+    
     public void GetHit(Vector3 lastVector)
     {
         StartCoroutine(HitState(lastVector));

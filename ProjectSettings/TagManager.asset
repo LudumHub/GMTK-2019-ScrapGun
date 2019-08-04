@@ -64,6 +64,9 @@ TagManager:
   - name: Items
     uniqueID: 2728469111
     locked: 0
+  - name: Enemies
+    uniqueID: 648953841
+    locked: 0
   - name: Walls
     uniqueID: 334562767
     locked: 0

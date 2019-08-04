@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     
     public void GetHit(Vector3 direction)
     {
+        Game.instance.Damage();
         StartCoroutine(HitState(direction));
     }
 
