@@ -51,6 +51,7 @@ MonoBehaviour:
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
   lootSpread: 0.5
+  ExtraDrop: 0
 --- !u!114 &4769612594122637964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0.1
   Speed: 3
+  waitingTime: 0.3
 --- !u!212 &7603118670948426287
 SpriteRenderer:
   m_ObjectHideFlags: 0
