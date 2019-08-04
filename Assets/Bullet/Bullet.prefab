@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Force: {x: 0, y: 10}
   MaxReflects: 10
+  reflects: 0
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
   Amount: 1
@@ -91,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f615e25e65d23f8448a8c0e2c29c2d77, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f588b9a78db6004abecf88953419029, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -244,4 +245,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.21

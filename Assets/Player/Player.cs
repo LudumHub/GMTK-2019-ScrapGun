@@ -15,11 +15,6 @@ public class Player : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        //CheckPoint
-    }
-
     void Update()
     {
         if(isStunned)

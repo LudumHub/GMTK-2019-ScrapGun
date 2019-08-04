@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
 
     static List<float> DistancesPerBulletsAmount = new List<float>()
     {
-        99, 35, 25, 12, 7, 6, 5.5f, 5, 4.5f, 4, 3.5f, 3
+        99, 35, 25, 12, 7, 6, 5.5f, 5, 4.5f, 4, 3.5f, 3, 2.5f, 2.2f, 2f, 1.9f, 1.8f, 1.7f, 1.6f, 1.5f, 1.4f
     };
 
     public static float GetBulletDistance(int bulletsAmount)

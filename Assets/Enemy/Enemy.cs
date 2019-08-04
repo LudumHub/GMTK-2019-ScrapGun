@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     public float Speed = 3f;
     bool isSleep = true;
     public float waitingTime = 1f;
+
+    public bool isHoldDistance = false;
     private void Start()
     {
         player = Player.instance.transform;

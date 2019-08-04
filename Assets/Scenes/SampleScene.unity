@@ -753,5 +753,10 @@ PrefabInstance:
       propertyPath: WaveAnnouncer
       value: 
       objectReference: {fileID: 395486214}
+    - target: {fileID: 6694927618633939634, guid: 7256beb4d95631b40b24ecf0d68262c9,
+        type: 3}
+      propertyPath: Wave
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7256beb4d95631b40b24ecf0d68262c9, type: 3}

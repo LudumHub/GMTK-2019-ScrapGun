@@ -21,6 +21,7 @@ public class Game : MonoBehaviour
     
     public List<Dictionary<string, int>> Waves = new List<Dictionary<string, int>>()
     {
+        new Dictionary<string, int>(),
         new Dictionary<string, int>(){{"Pusher", 1}},
         new Dictionary<string, int>(){{"Pusher", 5}},
         new Dictionary<string, int>(){{"Catapult", 1}},
@@ -54,6 +55,8 @@ public class Game : MonoBehaviour
     List<Enemy> units = new List<Enemy>(); 
     IEnumerator WaveAction()
     {
+        var animator = WaveAnnouncer.GetComponent<Animator>();
+        StartCoroutine(AnnounceText("Prepare"));   
         yield return new WaitForSeconds(1);
         
         var bounds = SpawnBounds.bounds;
@@ -78,11 +81,7 @@ public class Game : MonoBehaviour
             yield return new WaitForSeconds(4f);
         }
         
-        WaveAnnouncer.text = "Wave " + Wave;
-        var animator = WaveAnnouncer.GetComponent<Animator>();
-        animator.SetTrigger("Show");
-      
-        yield return new WaitForSeconds(5);
+        yield return  StartCoroutine(AnnounceText("Wave " + Wave));
 
         foreach (var unit in units)
             unit.WakeUp();
@@ -90,7 +89,15 @@ public class Game : MonoBehaviour
         while (units.Count > 0)
             yield return new WaitForSeconds(3f);
 
+        Wave++;
         GenerateWave();
+
+        IEnumerator AnnounceText(string text)
+        {
+            WaveAnnouncer.text = text;
+            animator.SetTrigger("Show");
+            yield return new WaitForSeconds(5);
+        }
     }
     
     public static void UnregisterEnemy(Enemy enemy)
