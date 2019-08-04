@@ -79,7 +79,8 @@ public class Gun : MonoBehaviour
         foreach (var sprite in CollectedScrap)
         {
             var rotation = shootRotation;
-            rotation.z += -(degrees/2) + (amount - Ammo) * degPerBulletMult;
+            if (amount>1)
+                rotation.z += -(degrees/2) + (amount - Ammo) * degPerBulletMult;
             
             var b = Instantiate(BulletPrefab, shootPosition, Quaternion.Euler(rotation));
             b.sprite = sprite;

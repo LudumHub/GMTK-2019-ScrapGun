@@ -16,11 +16,14 @@ public class Bullet : MonoBehaviour
     public int maxBullets = 6;
     IEnumerator Start()
     {
-        GetComponent<Rigidbody2D>().AddRelativeForce(Force, ForceMode2D.Impulse);
+        var rBody = GetComponent<Rigidbody2D>();
+            rBody.AddRelativeForce(Force, ForceMode2D.Impulse);
 
         var t = (maxLife - minLife) / maxBullets;
         t = Mathf.Max(maxLife - t * Amount, minLife);
         yield return new WaitForSeconds(t);
+        rBody.velocity = Vector2.zero;
+        yield return new WaitForSeconds(.2f);
         TurnIntoScrap();
     }
     
