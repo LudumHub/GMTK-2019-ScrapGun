@@ -585,6 +585,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 2.9998457
       objectReference: {fileID: 0}
+    - target: {fileID: 3744975292677838353, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1753630755
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744975292677838353, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744975292677838353, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744975292677838353, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2, type: 3}
 --- !u!1001 &6071108083985754833
