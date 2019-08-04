@@ -183,7 +183,7 @@ public class Gun : MonoBehaviour
     }
 
     List<Sprite> CollectedScrap = new List<Sprite>();
-    public void GetScrap(Sprite sprite)
+    public void GetScrap(Sprite sprite = null)
     {
         if (sprite == null)
             sprite = BulletPrefab.sprite;

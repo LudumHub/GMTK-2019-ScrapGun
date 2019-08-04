@@ -11,6 +11,7 @@ public class CamerePosition : MonoBehaviour
     public Collider2D CameraBounds;
     private Vector3 CameraMinShift;
     private Vector3 CameraMaxShift;
+    public Vector3 camShift = Vector3.zero;
     
     private void Awake()
     {
@@ -37,7 +38,8 @@ public class CamerePosition : MonoBehaviour
         var target = new Vector3(
             (Player.position.x + Target.position.x)/2,
             (Player.position.y + Target.position.y)/2, 
-            CameraZPosition);
+            CameraZPosition)
+            + camShift;
         
         if (target.x < CameraMinShift.x ||target.x > CameraMaxShift.x)
             target.x = lastTarget.x;

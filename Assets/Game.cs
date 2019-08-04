@@ -11,8 +11,8 @@ using Random = UnityEngine.Random;
 public class Game : MonoBehaviour
 {
     public static Game instance;
-    public static int Save = 0;
-    public int Wave = 1;
+    public static int Save = -1;
+    private int Wave;
     public Enemy Pusher;
     public Enemy PusherBig;
     public Enemy Swarmling;
@@ -20,7 +20,8 @@ public class Game : MonoBehaviour
     public Animator FadeOnDAmage;
     public Text WaveAnnouncer; 
     public Dictionary<string, Enemy> Beasteary;
-  
+    public CamerePosition camScript;
+    
     public List<Transform> MeleeSpawns = new List<Transform>();
     public List<Transform> RangeSpawns = new List<Transform>();
 
@@ -72,9 +73,27 @@ public class Game : MonoBehaviour
         GenerateWave();
     }
 
+    public Transform MainMenu;
     private void GenerateWave()
     {
-        StartCoroutine(WaveAction());
+        StartCoroutine(Wave < 0 ? 
+            MainMenuAction() : 
+            WaveAction());
+    }
+
+    private IEnumerator MainMenuAction()
+    {
+        MainMenu.gameObject.SetActive(true);
+        camScript.camShift = new Vector3(0,2,0);
+        Player.instance.Gun.GetScrap();
+        
+        yield return new WaitForSeconds(.5f);
+        
+        while (!Input.GetMouseButtonDown(0))
+            yield return null;
+        
+        MainMenu.gameObject.SetActive(false);
+        camScript.camShift = Vector3.zero;
     }
 
     List<Enemy> units = new List<Enemy>(); 
