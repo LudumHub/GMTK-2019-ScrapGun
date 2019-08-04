@@ -50,6 +50,7 @@ MonoBehaviour:
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
   lootSpread: 0.5
+  ExtraDrop: 2
 --- !u!212 &2793750377345178304
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -145,5 +146,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.58, y: 0.79}
   m_EdgeRadius: 0

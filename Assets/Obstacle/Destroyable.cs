@@ -11,6 +11,8 @@ public class Destroyable : MonoBehaviour
     public Scrap ScrapPrefab;
     public float lootSpread = .5f;
 
+    public int ExtraDrop = 0;
+    
     private void Awake()
     {
         hp = MaxHp;
@@ -29,10 +31,7 @@ public class Destroyable : MonoBehaviour
     {
         if (--hp > 0) return;
 
-        if (MaxHp > 1)
-            for (var i = 0; i < MaxHp / 2; i++)
-                SpawnScrap();
-        else
+        for (var i = 0; i < MaxHp+ExtraDrop; i++)
             SpawnScrap();
 
         Destroy(gameObject);

@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float maxSpeed = 7f;
     public float Speed = 3f;
     bool isSleep = true;
+    public float waitingTime = 1f;
     private void Start()
     {
         player = Player.instance.transform;
@@ -35,14 +36,22 @@ public class Enemy : MonoBehaviour
     private IEnumerator OppositeMovement()
     {
         directionMult = -1;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         isHorisontalMove = !isHorisontalMove;
+        currentPause = waitingTime/2;
         directionMult = 1;
     }
 
     private Vector3 lastVector;
+    private float currentPause = 0;
     void FixedUpdate()
     {
+        if (currentPause > 0)
+        {
+            currentPause -= Time.deltaTime;
+            return;
+        }
+        
         if (isSleep)
             return;
         
@@ -54,6 +63,7 @@ public class Enemy : MonoBehaviour
         if (distance < 0.1f)
         {
             isHorisontalMove = !isHorisontalMove;
+            currentPause = waitingTime;
             return;
         }
 

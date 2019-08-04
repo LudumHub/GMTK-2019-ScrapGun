@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Wall"))
             return;
-        
+
         reflects++;
         if (reflects == MaxReflects)
             TurnIntoScrap();
