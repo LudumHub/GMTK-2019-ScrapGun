@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536942360039438097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4601615, y: 0.43459272, z: -0.4664306}
+  m_LocalPosition: {x: -0.792, y: 0.073, z: -0.4664306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,9 +52,6 @@ MonoBehaviour:
   ScrapPrefab: {fileID: 1104101317923851079, guid: b79744afffd25bc468ac08ec2e82c652,
     type: 3}
   Amount: 1
-  maxLife: 2
-  minLife: 0.2
-  maxBullets: 5
 --- !u!212 &2191518772365370453
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: f615e25e65d23f8448a8c0e2c29c2d77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
