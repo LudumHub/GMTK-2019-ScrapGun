@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         player = Player.instance.transform;
+        timer = Random.Range(0, shootTimer);
+        if (isHoldDistance)
+            targetDistance = 7f;
     }
 
     private void OnDestroy()
@@ -30,10 +34,12 @@ public class Enemy : MonoBehaviour
         if (other.collider.CompareTag("Player"))
             other.gameObject.GetComponent<Player>()
                 .GetHit(lastVector);
-        
+
         if (other.collider.CompareTag("Box"))
+        {
             return;
-        
+        }
+
         StartCoroutine(OppositeMovement());
     }
 
@@ -43,14 +49,15 @@ public class Enemy : MonoBehaviour
         directionMult = -1;
         currentPause = waitingTime/2;
         yield return new WaitForSeconds(waitingTime/2);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.04f);
         isHorisontalMove = !isHorisontalMove;
-        currentPause = waitingTime;
         directionMult = 1;
+        currentPause = waitingTime;
     }
 
     private Vector3 lastVector;
     private float currentPause = 0;
+    private float targetDistance = 0.1f;
     void FixedUpdate()
     {
         if (currentPause > 0)
@@ -67,13 +74,26 @@ public class Enemy : MonoBehaviour
             : player.position.y - transform.position.y;
         
         var distance = Mathf.Abs(targetDelta);
-        if (distance < 0.1f)
+
+        if (distance < .1f)
         {
-            isHorisontalMove = !isHorisontalMove;
             currentPause = waitingTime;
+            isHorisontalMove = !isHorisontalMove;
             return;
         }
-        
+
+        if (isHoldDistance && Vector3.Distance(transform.position, player.position)
+            < targetDistance)
+        {
+            if (spawnTimeout > 0)
+                spawnTimeout -= Time.deltaTime;
+            else
+            {
+                ShootingCheck();
+                return;
+            }
+        }
+
         targetDelta *= Time.deltaTime * Speed * directionMult; 
         if (Mathf.Abs(targetDelta) > maxSpeed)
             targetDelta = maxSpeed * Mathf.Sign(targetDelta);
@@ -84,6 +104,27 @@ public class Enemy : MonoBehaviour
         
         transform.localScale = targetDelta > 0 ? 
             Vector3.one : new Vector3(-1,1,1);
+    }
+
+    public BarrelSot bulletPrefab;
+    public float shootTimer = 3f;
+    private float spawnTimeout = 1f;
+    private float timer = 0;
+    private void ShootingCheck()
+    {
+        if (bulletPrefab == null)
+            return;
+
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            return;
+        }
+
+        Instantiate(bulletPrefab, transform.position, Quaternion.identity)
+            .target = player.transform.position;
+        
+        timer = shootTimer;
     }
 
     public void WakeUp()

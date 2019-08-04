@@ -38,10 +38,16 @@ public class Destroyable : MonoBehaviour
 
         void SpawnScrap()
         {
+            Vector3 pos;
+            do
+            {
+                pos = transform.position+
+                      new Vector3(Random.Range(-1, 1) * lootSpread, Random.Range(-1, 1) * lootSpread);
+            } while (Physics2D.OverlapPoint(pos, 1 << 4) != null);
+            
             Instantiate<Scrap>(
                 ScrapPrefab,
-                transform.position +
-                new Vector3(Random.Range(-1, 1) * lootSpread, Random.Range(-1, 1) * lootSpread),
+                pos,
                 Quaternion.identity);
         }
     }

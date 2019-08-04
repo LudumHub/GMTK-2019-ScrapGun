@@ -16,6 +16,7 @@
           <e p="Shaker.cs" t="Include" />
         </e>
         <e p="Enemy" t="Include">
+          <e p="BarrelSot.cs" t="Include" />
           <e p="Enemy.cs" t="Include" />
         </e>
         <e p="Game.cs" t="Include" />

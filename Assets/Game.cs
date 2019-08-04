@@ -60,9 +60,10 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(1);
         
         var bounds = SpawnBounds.bounds;
+        yield return  StartCoroutine(AnnounceText("Wave " + Wave));
+        
         foreach (var UnitAndAmount in Waves.ElementAt(Wave))
         {
-            units.Clear();
             for (var i = 0; i < UnitAndAmount.Value; i++)
             {
                 var position = Random.Range(0, 2) == 0
@@ -70,24 +71,21 @@ public class Game : MonoBehaviour
                         Random.Range(0, 2) == 0 ? bounds.min.y : bounds.max.y)
                     : new Vector2(Random.Range(0, 2) == 0 ? bounds.min.x : bounds.max.x,
                         Random.Range(bounds.min.y, bounds.max.y));
-                
-                units.Add(Instantiate(
+
+                var unit = Instantiate(
                     Beasteary[UnitAndAmount.Key],
                     position,
                     Quaternion.identity,
-                    transform));
+                    transform);
+                
+                units.Add(unit);
+                unit.WakeUp();
             }
-
             yield return new WaitForSeconds(4f);
         }
         
-        yield return  StartCoroutine(AnnounceText("Wave " + Wave));
-
-        foreach (var unit in units)
-            unit.WakeUp();
-        
         while (units.Count > 0)
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForFixedUpdate();
 
         Wave++;
         GenerateWave();

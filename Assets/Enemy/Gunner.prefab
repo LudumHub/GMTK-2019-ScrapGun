@@ -12,10 +12,21 @@ PrefabInstance:
       propertyPath: isHoldDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4769612594122637964, guid: e7e73b526cf2e0c45a119b29a702d955,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 8526125775710876430, guid: ef64211232ae74542bb5d73da48ec943,
+        type: 3}
+    - target: {fileID: 4769612594122637964, guid: e7e73b526cf2e0c45a119b29a702d955,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426284, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
       propertyPath: m_Name
-      value: Gunner Variant
+      value: Gunner
       objectReference: {fileID: 0}
     - target: {fileID: 7603118670948426286, guid: e7e73b526cf2e0c45a119b29a702d955,
         type: 3}
