@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothDampTime: 0.07
   deviation: {x: 0, y: 0, z: 0}
-  deviationChangeTimer: 0.3
+  deviationChangeTimer: 0.07
   deviationSize: 0.5
 --- !u!4 &345360508 stripped
 Transform:
@@ -1247,6 +1247,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3744975291939295914, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 2001601429}
     - target: {fileID: 1295760304, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2, type: 3}
       propertyPath: m_LocalPosition.y
       value: -5.38
@@ -1324,11 +1329,6 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 2001601430}
-    - target: {fileID: 3744975291939295914, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
-        type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 2001601429}
     - target: {fileID: 3744975292677838352, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
         type: 3}
       propertyPath: m_LocalScale.x

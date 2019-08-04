@@ -46,6 +46,9 @@ public class Enemy : MonoBehaviour
     private int directionMult = 1;
     private IEnumerator OppositeMovement()
     {
+        if (bulletPrefab != null)
+            yield break;
+            
         directionMult = -1;
         currentPause = waitingTime/2;
         yield return new WaitForSeconds(waitingTime/2);

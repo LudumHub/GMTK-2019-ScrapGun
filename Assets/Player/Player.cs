@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     
     public void GetHit(Vector3 direction)
     {
+        Shaker.instance.ShakeContinuously();
         Game.instance.Damage();
         StartCoroutine(HitState(direction));
     }
