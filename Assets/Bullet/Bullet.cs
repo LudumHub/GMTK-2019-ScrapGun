@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public Vector2 Force;
     public int MaxReflects = 2;
-    private int reflects = 0;
+    public int reflects = 0;
     public Scrap ScrapPrefab;
     public int Amount = 1;
 
@@ -29,6 +29,9 @@ public class Bullet : MonoBehaviour
             DistanceAlive += Vector3.Distance(prevPosition, transform.position);
             prevPosition = transform.position;
         }
+        
+        while (Physics2D.OverlapPoint(transform.position, 1 << 4) != null)
+            yield return new WaitForFixedUpdate();
         
         rBody.velocity = Vector2.zero;
         yield return new WaitForSeconds(.2f);

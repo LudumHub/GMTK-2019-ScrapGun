@@ -86,6 +86,9 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            if (other.gameObject.GetComponent<Bullet>().reflects == 0)
+                return;
+            
             Destroy(other.gameObject);
             Gun.GetScrap(other.gameObject.GetComponent<SpriteRenderer>().sprite);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;

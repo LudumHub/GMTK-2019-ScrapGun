@@ -40,7 +40,8 @@ public class Enemy : MonoBehaviour
     {
         directionMult = -1;
         currentPause = waitingTime/2;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(waitingTime/2);
+        yield return new WaitForSeconds(0.1f);
         isHorisontalMove = !isHorisontalMove;
         currentPause = waitingTime;
         directionMult = 1;

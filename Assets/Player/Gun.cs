@@ -24,10 +24,11 @@ public class Gun : MonoBehaviour
     private float prevAngle = 0;
     public List<LineRenderer> activeHelpers = new List<LineRenderer>();
     private List<float> eulerHelpers = new List<float>();
-    
+    public List<Transform> HaveScrapVisual;
+
     static List<float> DistancesPerBulletsAmount = new List<float>()
     {
-        99, 35, 25, 19, 10, 7, 6, 5, 4.5f, 4, 3.5f, 3
+        99, 35, 25, 12, 7, 6, 5.5f, 5, 4.5f, 4, 3.5f, 3
     };
 
     public static float GetBulletDistance(int bulletsAmount)
@@ -51,7 +52,7 @@ public class Gun : MonoBehaviour
     
     static List<float> BulletSizePerBulletsAmount = new List<float>()
     {
-        1, 1, 1.1f, 1.2f, 1.3f, 1.4f, 1.6f, 1.7f, 1.8f, 2f
+        1, 1, 1.1f, 1.2f, 1.3f, 1.4f
     };
 
     public static float GetBulletSize(int bulletsAmount)
@@ -89,6 +90,16 @@ public class Gun : MonoBehaviour
             line.SetPosition(1, rotation);
         }
 
+        foreach (var visual in HaveScrapVisual)
+            visual.gameObject.SetActive(false);
+        
+        if (ammo == 1)
+            HaveScrapVisual[0].gameObject.SetActive(true);
+        else if (ammo > 1 && ammo < 5)
+            HaveScrapVisual[1].gameObject.SetActive(true);  
+        else if (ammo > 4)
+            HaveScrapVisual[2].gameObject.SetActive(true); 
+        
         Ammo = ammo;
         AmmoText.text = Ammo.ToString();
         

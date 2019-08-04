@@ -9,6 +9,12 @@
           <e p="BulletsHelper.cs" t="Include" />
         </e>
         <e p="CamerePosition.cs" t="Include" />
+        <e p="Effects" t="Include">
+          <e p="Explosion" t="Include">
+            <e p="AutoDestroy.cs" t="Include" />
+          </e>
+          <e p="Shaker.cs" t="Include" />
+        </e>
         <e p="Enemy" t="Include">
           <e p="Enemy.cs" t="Include" />
         </e>
@@ -23,7 +29,6 @@
         <e p="Scrap" t="Include">
           <e p="Scrap.cs" t="Include" />
         </e>
-        <e p="Sprites-SolidCol.shader" t="Include" />
         <e p="Target.cs" t="Include" />
       </e>
       <e p="GMTKScrapGun.sln" t="IncludeFlat" />
