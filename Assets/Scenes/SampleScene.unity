@@ -772,6 +772,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 95061792355221200, guid: 403a1e6fefab88246bb399914f9daec5, type: 3}
   Dust: {fileID: 198150055904890010, guid: bc60be5bba3d9be48a952d3d4407c903, type: 3}
+  ReflectEffect: {fileID: 4201986620644936, guid: 189f09cc4aff4b04ead239a405ef56f7,
+    type: 3}
 --- !u!4 &555610743
 Transform:
   m_ObjectHideFlags: 0
@@ -1180,7 +1182,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 78118cda2b595984696b3b55fcb71953, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.492
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1706,7 +1708,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cd65a053436601343811dbb1b022878f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.607
   m_Pitch: 1
   Loop: 0
   Mute: 0

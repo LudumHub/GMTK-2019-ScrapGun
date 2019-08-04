@@ -45,6 +45,7 @@ public class Bullet : MonoBehaviour
 
         reflects++;
         MusicBox.Play("Ricochet");
+        Effects.Reflect(transform.position, -transform.up);
         if (reflects == MaxReflects)
             TurnIntoScrap();
     }

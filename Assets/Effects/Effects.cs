@@ -8,11 +8,18 @@ public class Effects : MonoBehaviour
     private static Effects instance;
     public Animator Explosion;
     public ParticleSystem Dust;
+    public Transform ReflectEffect;
     private void Awake()
     {
         instance = this;
     }
 
+    public static void Reflect(Vector3 coords, Vector3 direction)
+    {
+        var e = Instantiate(instance.ReflectEffect, coords, Quaternion.identity);
+        e.transform.localScale = 0.4f * new Vector3(Mathf.Sign(direction.x), Mathf.Sign(direction.y));
+    }
+    
     public static void Explode(Vector3 coords, float scale = 1)
     {
         Instantiate(instance.Explosion, coords, Quaternion.identity)

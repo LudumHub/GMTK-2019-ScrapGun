@@ -60,9 +60,8 @@ public class Enemy : MonoBehaviour
         directionMult = -1;
         currentPause = waitingTime/2;
         yield return new WaitForSeconds(waitingTime/2);
-        yield return new WaitForSeconds(0.04f);
+        yield return new WaitForSeconds(0.5f);
         
-        Dust.Play();
         isHorisontalMove = !isHorisontalMove;
         directionMult = 1;
         currentPause = waitingTime;
