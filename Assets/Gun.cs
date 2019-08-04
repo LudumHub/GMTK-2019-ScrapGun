@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,17 +11,33 @@ public class Gun : MonoBehaviour
     public Transform TextAncor;
     public int Ammo = 0;
     public SpriteRenderer BulletPrefab;
+    
+    public List<BulletsHelper> shootingGuide = new List<BulletsHelper>();
     private void Awake()
     {
         UpdateAmmo(0);
-        collider = GetComponent<Collider2D>();
+        collider = GetComponent<Collider2D>(); ;
     }
 
     Collider2D collider;
     public float degMovementIsAttack = 2f;
     private float prevAngle = 0;
+    private Transform activeHelper;
     private void UpdateAmmo(int ammo)
     {
+        if (activeHelper != null)
+        {
+            activeHelper.gameObject.SetActive(false);
+            activeHelper = null;
+        }
+
+        if (ammo > 0)
+        {
+            activeHelper = shootingGuide.ElementAt(ammo > shootingGuide.Count - 1 ? shootingGuide.Count - 1 : ammo)
+                .transform;
+            activeHelper.gameObject.SetActive(true);
+        }
+
         Ammo = ammo;
         AmmoText.text = Ammo.ToString();
     }
@@ -74,14 +91,27 @@ public class Gun : MonoBehaviour
         var shootRotation = transform.rotation.eulerAngles;
         var amount = Ammo;
         
+        var guide = shootingGuide.ElementAt(
+            shootingGuide.Count - 1 < Ammo ? 
+            Ammo :
+            shootingGuide.Count - 1);
+
         var degPerBulletMult = 20;
         var degrees = degPerBulletMult * Ammo;
         foreach (var sprite in CollectedScrap)
         {
             var rotation = shootRotation;
-            if (amount>1)
-                rotation.z += -(degrees/2) + (amount - Ammo) * degPerBulletMult;
-            
+            if (amount > shootingGuide.Count - 1)
+                rotation.z += -(degrees / 2) + (amount - Ammo) * degPerBulletMult;
+            else
+            {
+                var diff = guide.bullets[amount - Ammo].position - transform.position;
+                diff.Normalize();
+ 
+                var rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                rotation.z = rot_z - 90;
+            }
+
             var b = Instantiate(BulletPrefab, shootPosition, Quaternion.Euler(rotation));
             b.sprite = sprite;
             b.GetComponent<Bullet>().Amount = amount;
