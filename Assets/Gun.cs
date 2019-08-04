@@ -11,8 +11,8 @@ public class Gun : MonoBehaviour
     public Transform TextAncor;
     public int Ammo = 0;
     public SpriteRenderer BulletPrefab;
-    
-    public List<BulletsHelper> shootingGuide = new List<BulletsHelper>();
+
+    public LineRenderer HelperLine;
     private void Awake()
     {
         UpdateAmmo(0);
@@ -22,24 +22,82 @@ public class Gun : MonoBehaviour
     Collider2D collider;
     public float degMovementIsAttack = 2f;
     private float prevAngle = 0;
-    private Transform activeHelper;
+    private List<LineRenderer> activeHelpers = new List<LineRenderer>();
+    private List<float> eulerHelpers = new List<float>();
+    
+    static List<float> DistancesPerBulletsAmount = new List<float>()
+    {
+        25, 19, 15, 12, 10, 8, 7, 6, 5, 4
+    };
+
+    public static float GetBulletDistance(int bulletsAmount)
+    {
+        return DistancesPerBulletsAmount[
+            Mathf.Min(DistancesPerBulletsAmount.Count - 1, bulletsAmount)
+        ];
+    }
+
+    static List<float> DegreeSpreadPerBulletsAmount = new List<float>()
+    {
+        0, 5, 7, 10, 12, 15, 20, 25, 30, 35
+    };
+
+    public static float GetDegreeSpread(int bulletsAmount)
+    {
+        return DegreeSpreadPerBulletsAmount[
+            Mathf.Min(DegreeSpreadPerBulletsAmount.Count - 1, bulletsAmount)
+        ];
+    }
+    
+    static List<float> BulletSizePerBulletsAmount = new List<float>()
+    {
+        1, 1.1f, 1.3f, 1.5f, 1.7f, 2, 2.3f, 2.5f, 3f, 3.5f
+    };
+
+    public static float GetBulletSize(int bulletsAmount)
+    {
+        return DegreeSpreadPerBulletsAmount[
+            Mathf.Min(DegreeSpreadPerBulletsAmount.Count - 1, bulletsAmount)
+        ];
+    }
+    
     private void UpdateAmmo(int ammo)
     {
-        if (activeHelper != null)
+        foreach (var line in activeHelpers)
+            Destroy(line.gameObject);
+        
+        activeHelpers.Clear();
+        eulerHelpers.Clear();
+        
+        var degPerBulletMult = GetDegreeSpread(ammo);
+        var degrees = degPerBulletMult * (Ammo-1);
+        
+        for (var i = 0; i < ammo; i++)
         {
-            activeHelper.gameObject.SetActive(false);
-            activeHelper = null;
-        }
-
-        if (ammo > 0)
-        {
-            activeHelper = shootingGuide.ElementAt(ammo > shootingGuide.Count - 1 ? shootingGuide.Count - 1 : ammo)
-                .transform;
-            activeHelper.gameObject.SetActive(true);
+            var line = Instantiate(HelperLine, transform.position, Quaternion.identity, transform);
+            activeHelpers.Add(line);
+            
+            var rotation = transform.up;
+            var angle = (degrees / 2) - 
+                        (ammo - i - 1) * degPerBulletMult;
+            
+            eulerHelpers.Add(angle);
+            rotation = RotateRadians(rotation, angle * (float)(Math.PI/180));
+            rotation *= GetBulletDistance(ammo);
+            line.startWidth *= GetBulletSize(ammo);
+            
+            line.SetPosition(1, rotation);
         }
 
         Ammo = ammo;
         AmmoText.text = Ammo.ToString();
+        
+        Vector3 RotateRadians(Vector3 v, float radians)
+        {
+            var ca = Mathf.Cos(radians);
+            var sa = Mathf.Sin(radians);
+            return new Vector3(ca*v.x - sa*v.y, sa*v.x + ca*v.y);
+        }
     }
 
     public float meleePushPower = 100;
@@ -88,37 +146,25 @@ public class Gun : MonoBehaviour
 
         var randomShift = 0;
         var shootPosition = TextAncor.position;
-        var shootRotation = transform.rotation.eulerAngles;
         var amount = Ammo;
-        
-        var guide = shootingGuide.ElementAt(
-            shootingGuide.Count - 1 < Ammo ? 
-            Ammo :
-            shootingGuide.Count - 1);
-
-        var degPerBulletMult = 20;
-        var degrees = degPerBulletMult * Ammo;
+        var gun_rotation = transform.rotation.eulerAngles.z;
         foreach (var sprite in CollectedScrap)
         {
-            var rotation = shootRotation;
-            if (amount > shootingGuide.Count - 1)
-                rotation.z += -(degrees / 2) + (amount - Ammo) * degPerBulletMult;
-            else
-            {
-                var diff = guide.bullets[amount - Ammo].position - transform.position;
-                diff.Normalize();
- 
-                var rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-                rotation.z = rot_z - 90;
-            }
-
-            var b = Instantiate(BulletPrefab, shootPosition, Quaternion.Euler(rotation));
+             var rotation_z = gun_rotation +
+                             eulerHelpers[amount - Ammo];
+             
+             var b = Instantiate(
+                BulletPrefab, 
+                shootPosition, 
+                Quaternion.Euler(0f, 0f, rotation_z));
+            
             b.sprite = sprite;
             b.GetComponent<Bullet>().Amount = amount;
-            UpdateAmmo(--Ammo);
+            Ammo--;
             randomShift++;
         }
         
+        UpdateAmmo(0);
         CollectedScrap.Clear();
     }
 

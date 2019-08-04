@@ -11,17 +11,25 @@ public class Bullet : MonoBehaviour
     public Scrap ScrapPrefab;
     public int Amount = 1;
 
-    public float maxLife = 3f;
-    public float minLife = 0.2f;
-    public int maxBullets = 6;
+    private float DistanceAlive = 0;
+    private float DistanceNeeded;
+
+    private Vector3 prevPosition;
     IEnumerator Start()
     {
+        prevPosition = transform.position;
         var rBody = GetComponent<Rigidbody2D>();
-            rBody.AddRelativeForce(Force, ForceMode2D.Impulse);
-
-        var t = (maxLife - minLife) / maxBullets;
-        t = Mathf.Max(maxLife - t * Amount, minLife);
-        yield return new WaitForSeconds(t);
+        rBody.AddRelativeForce(Force, ForceMode2D.Impulse);
+        DistanceNeeded = Gun.GetBulletDistance(Amount);
+        transform.localScale *= Gun.GetBulletSize(Amount);
+        
+        while (DistanceAlive < DistanceNeeded)
+        {
+            yield return new WaitForFixedUpdate();
+            DistanceAlive += Vector3.Distance(prevPosition, transform.position);
+            prevPosition = transform.position;
+        }
+        
         rBody.velocity = Vector2.zero;
         yield return new WaitForSeconds(.2f);
         TurnIntoScrap();
