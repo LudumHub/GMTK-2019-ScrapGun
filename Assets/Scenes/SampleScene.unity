@@ -479,12 +479,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!61 &1255225566 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 3744975292809908746, guid: 9ccb0f12185d9c049a8b6dd71c9d5de2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3744975291900865236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2001601429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6071108082689583428, guid: beb6c51234b94044ba6ea59ccf9b4ac4,
@@ -676,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 6694927618633939635, guid: 7256beb4d95631b40b24ecf0d68262c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6694927618633939635, guid: 7256beb4d95631b40b24ecf0d68262c9,
         type: 3}
@@ -723,15 +717,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6694927618633939634, guid: 7256beb4d95631b40b24ecf0d68262c9,
-        type: 3}
-      propertyPath: WaveAnnouncer
-      value: 
-      objectReference: {fileID: 395486214}
-    - target: {fileID: 6694927618633939634, guid: 7256beb4d95631b40b24ecf0d68262c9,
-        type: 3}
-      propertyPath: SpawnBounds
-      value: 
-      objectReference: {fileID: 1255225566}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7256beb4d95631b40b24ecf0d68262c9, type: 3}

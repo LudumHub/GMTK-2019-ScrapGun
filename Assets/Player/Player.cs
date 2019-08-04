@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     public bool UseSmoothMovement = false;
     public float InputMultiplicator = 0.4f;
     public Gun Gun;
-   private void Awake()
+    public Transform Visual; 
+    private void Awake()
     {
         instance = this;
     }
@@ -51,6 +52,11 @@ public class Player : MonoBehaviour
         transform.position += movement*Time.deltaTime;
     }
 
+    private void FixedUpdate()
+    {
+        Visual.transform.rotation = Gun.transform.rotation;
+    }
+    
     public void GetHit(Vector3 direction)
     {
         StartCoroutine(HitState(direction));

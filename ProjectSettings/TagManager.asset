@@ -46,11 +46,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: background
     uniqueID: 1259969203
+    locked: 0
+  - name: Water
+    uniqueID: 1104416365
+    locked: 0
+  - name: Floor
+    uniqueID: 491144607
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Items
     uniqueID: 2728469111

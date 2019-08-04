@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
             other.gameObject.GetComponent<Player>()
                 .GetHit(lastVector);
         
+        if (other.collider.CompareTag("Box"))
+            return;
+        
         StartCoroutine(OppositeMovement());
     }
 
@@ -36,9 +39,10 @@ public class Enemy : MonoBehaviour
     private IEnumerator OppositeMovement()
     {
         directionMult = -1;
-        yield return new WaitForSeconds(0.1f);
-        isHorisontalMove = !isHorisontalMove;
         currentPause = waitingTime/2;
+        yield return new WaitForSeconds(0.05f);
+        isHorisontalMove = !isHorisontalMove;
+        currentPause = waitingTime;
         directionMult = 1;
     }
 
@@ -66,7 +70,7 @@ public class Enemy : MonoBehaviour
             currentPause = waitingTime;
             return;
         }
-
+        
         targetDelta *= Time.deltaTime * Speed * directionMult; 
         if (Mathf.Abs(targetDelta) > maxSpeed)
             targetDelta = maxSpeed * Mathf.Sign(targetDelta);
@@ -74,6 +78,9 @@ public class Enemy : MonoBehaviour
         lastVector = targetDelta *
                          (isHorisontalMove ? Vector3.right : Vector3.up);
         transform.position += lastVector;
+        
+        transform.localScale = targetDelta > 0 ? 
+            Vector3.one : new Vector3(-1,1,1);
     }
 
     public void WakeUp()
