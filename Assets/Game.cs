@@ -89,9 +89,10 @@ public class Game : MonoBehaviour
             for (var i = 0; i < UnitAndAmount.Value; i++)
             {
                 var position = (Beasteary[UnitAndAmount.Key] == Catapult
-                        ? RangeSpawns[Random.Range(0, RangeSpawns.Count - 1)]
-                        : MeleeSpawns[Random.Range(0, MeleeSpawns.Count - 1)]
-                    ).position;
+                                   ? RangeSpawns[Random.Range(0, RangeSpawns.Count)]
+                                   : MeleeSpawns[Random.Range(0, MeleeSpawns.Count)]
+                               ).position
+                               + Vector3.left * Random.Range(-.3f, .3f);
 
                 var unit = Instantiate(
                     Beasteary[UnitAndAmount.Key],
@@ -101,8 +102,9 @@ public class Game : MonoBehaviour
                 
                 units.Add(unit);
                 unit.WakeUp();
+                yield return new WaitForFixedUpdate();
             }
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(1f);
         }
         
         while (units.Count > 0)

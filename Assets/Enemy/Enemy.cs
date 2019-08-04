@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         player = Player.instance.transform;
-        timer = Random.Range(0, shootTimer);
         if (isHoldDistance)
             targetDistance = 12f;
     }
@@ -109,7 +108,7 @@ public class Enemy : MonoBehaviour
 
     public BarrelSot bulletPrefab;
     public float shootTimer = 3f;
-    private float spawnTimeout = 3f;
+    private float spawnTimeout = 1.5f;
     private float timer = 0;
     private void ShootingCheck()
     {

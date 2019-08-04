@@ -20,7 +20,7 @@ public class Destroyable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Player") && rBody.velocity != Vector2.zero)
+        if(other.gameObject.CompareTag("Player") && isDangerous)
             other.gameObject.GetComponent<Player>()
                 .GetHit(transform.position - other.transform.position);
         
@@ -68,13 +68,15 @@ public class Destroyable : MonoBehaviour
         StartCoroutine(HitState(lastVector));
     }
 
-    public bool isStunned = false;
+    public bool isDangerous = false;
 
     private IEnumerator HitState(Vector3 direction)
     {
+        isDangerous = true;
         var rBody = GetComponent<Rigidbody2D>();
         rBody.AddForce(direction.normalized * 5, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         rBody.velocity = Vector2.zero;
+        isDangerous = false;
     }
 }
